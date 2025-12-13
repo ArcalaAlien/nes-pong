@@ -1,0 +1,9 @@
+MainJumpEngine:
+    AND #%00001111
+    TAX
+    LDA MAIN_PROGRAM_STATE_TABLE+1, X
+    PHA
+    LDA MAIN_PROGRAM_STATE_TABLE, X
+    PHA
+    RTS
+.EXPORT MainJumpEngine
