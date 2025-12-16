@@ -35,7 +35,7 @@ DrawScreen:
         CPX #$04
         BNE DrawScreenLoop
 
-    LDA currentScreen
+    LDA currentScreen+1
     STA nextScreen+1
     :
         RTS

@@ -90,6 +90,13 @@
     STA p1Paddle+1
     STA p2Paddle+1
 
+    LDA #UFO_START_Y
+    STA logoUFOPos
+    LDA #UFO_START_X
+    STA logoUFOPos+1
+    LDA #UFO_DEFAULT_FLAGS
+    STA logoUFOFlags
+
     BIT PPUSTATUS
     LDA #$00
     STA PPUSCROLL

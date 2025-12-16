@@ -18,11 +18,26 @@ nextPaletteDest: .RES 1
 nextPalette: .RES 2
 currentPalette: .RES 2
 
+; UFO Stuff (Y, then X)
+logoUFOPos: .RES 2
+ufoTargetPos: .RES 2
+ufoPathIndex: .RES 2
+
+; 0000 0000
+; bit 7 - enabled
+; bit 6 - bg/fg
+; bits 0-1 speed
+; bits 2-3 palette
+logoUFOFlags: .RES 1
+
+sparkleX: .RES 3
+sparkleY: .RES 3
+
 ;Controller Stuff
 buttons: .RES 2
 
 ;Ball
-;x then y
+;y then x
 ballPos: .RES 2
 ballSpeed: .RES 2
 
@@ -48,3 +63,4 @@ p2Paddle: .RES 2
 .EXPORTZP currentScreen, nextTable, currentPalette, nextPalette, lastPaletteDest, nextPaletteDest
 .EXPORTZP buttons, ballPos, ballSpeed, ballState
 .EXPORTZP p1Paddle, p2Paddle
+.EXPORTZP logoUFOPos, logoUFOFlags, ufoPathIndex, ufoTargetPos

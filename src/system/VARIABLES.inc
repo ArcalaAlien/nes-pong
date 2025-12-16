@@ -5,5 +5,4 @@ matches                     = $0401
 ; Logo
 logoState                   = $0402
 
-
 ;Game settings

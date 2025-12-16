@@ -21,10 +21,10 @@ PALETTES:
         .BYTE $0F, $08, $18, $29
         .BYTE $0F, $0B, $1A, $29, $FF ; Terminator
     TITLE_BG_FADE_1:
-        .BYTE $0F, $00, $10, $20
-        .BYTE $0F, $1C, $2C, $3C
-        .BYTE $0F, $08, $18, $29
-        .BYTE $0F, $0B, $1A, $29, $FF ; Terminator
+        .BYTE $0F, $02, $12, $22
+        .BYTE $0F, $1E, $2E, $3E
+        .BYTE $0F, $0A, $1A, $2B
+        .BYTE $0F, $0D, $1C, $2B, $FF ; Terminator
     TITLE_BG_FADE_2:
         .BYTE $0F, $00, $10, $20
         .BYTE $0F, $1C, $2C, $3C
@@ -37,7 +37,7 @@ PALETTES:
         .BYTE $0F, $0B, $1A, $29, $FF ; Terminator
 .EXPORT PALETTES
 .EXPORT LOGO_BG_FADE_0, LOGO_BG_FADE_1, LOGO_BG_FADE_2, LOGO_BG_FADE_FINAL, LOGO_SPRITE_COLORS
-.EXPORT TITLE_BG_FADE0, TITLE_BG_FADE_1, TITLE_BG_FADE2, TITLE_BG_FADE_FINAL
+.EXPORT TITLE_BG_FADE_0, TITLE_BG_FADE_1, TITLE_BG_FADE_2, TITLE_BG_FADE_FINAL
 
 SCREENS:
     .INCLUDE "graphics/screens/logoScreen.inc"
@@ -50,3 +50,10 @@ SCREENS:
 .EXPORT SCREENS
 .EXPORT logoScreen, titleScreen ;, chooseGamemodeScreen, chooseDifficultyScreen
 ;.EXPORT classicStatusBar, chooseEffectBar, backgroundScreenOne
+
+; $FF is a terminator
+UFO_MOVEMENT_PATH_X:
+    .BYTE $E0, $0F, $C0, $0F, $FF
+UFO_MOVEMENT_PATH_Y:
+    .BYTE $1F, $2F, $3F, $4D, $FF
+.EXPORT UFO_MOVEMENT_PATH_X, UFO_MOVEMENT_PATH_Y

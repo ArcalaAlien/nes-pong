@@ -15,8 +15,10 @@ GAMESTATE_CHOOSE_MODIFIER   = $24
 
 ;Logo States
 LOGOSTATE_FADE_IN           = $00
-LOGOSTATE_SHOW_UFO          = $01
-LOGOSTATE_FADE_OUT          = $02
+LOGOSTATE_LOAD_UFO          = $01
+LOGOSTATE_MOVE_UFO          = $02
+LOGOSTATE_REMOVE_UFO        = $03
+LOGOSTATE_FADE_OUT          = $04
 
 ;Fade Steps
 FADE_STEP_BEGIN             = $00
@@ -125,3 +127,50 @@ COLOR_FLAG_PLT1             = %00000000
 COLOR_FLAG_PLT2             = %00010000
 COLOR_FLAG_PLT3             = %00100000
 COLOR_FLAG_PLT4             = %00110000
+
+; UFO Stuff
+UFO_START_X                 = $F0
+UFO_START_Y                 = $0F
+UFO_DEFAULT_FLAGS           = %00000000
+
+;Sprite positions in OAM
+;LogoUFOLeft
+SPRITE_0_Y      = $0200
+SPRITE_0_TILE   = $0201
+SPRITE_0_ATTRIB = $0202
+SPRITE_0_X      = $0203
+;LogoUFORight
+SPRITE_1_Y      = $0204
+SPRITE_1_TILE   = $0205
+SPRITE_1_ATTRIB = $0206
+SPRITE_1_X      = $0207
+;LogoSparkleOne
+SPRITE_2_Y      = $0208
+SPRITE_2_TILE   = $0209
+SPRITE_2_ATTRIB = $020A
+SPRITE_2_X      = $020B
+;LogoSparkleTwo
+SPRITE_3_Y      = $020C
+SPRITE_3_TILE   = $020D
+SPRITE_3_ATTRIB = $020E
+SPRITE_3_X      = $020F
+;Menu Cursor
+SPRITE_4_Y      = $0210
+SPRITE_4_TILE   = $0211
+SPRITE_4_ATTRIB = $0212
+SPRITE_4_X      = $0213
+;Paddle 1
+SPRITE_5_Y      = $0214
+SPRITE_5_TILE   = $0215
+SPRITE_5_ATTRIB = $0216
+SPRITE_5_X      = $0217
+;Paddle 2
+SPRITE_6_Y      = $0218
+SPRITE_6_TILE   = $0219
+SPRITE_6_ATTRIB = $021A
+SPRITE_6_X      = $021B
+;Ball
+SPRITE_7_Y      = $021C
+SPRITE_7_TILE   = $021D
+SPRITE_7_ATTRIB = $021E
+SPRITE_7_X      = $021F

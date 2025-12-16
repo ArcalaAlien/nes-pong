@@ -7,6 +7,7 @@
 .INCLUDE "system/VARIABLES.inc"
 
 .IMPORT FadeIn4Steps, FadeOut4Steps
+.IMPORT DrawUFO, SetUFOTarget, MoveUFO
 .PROC MAIN
     loop:
         LDA programState
@@ -38,7 +39,7 @@
             ; Check if we've finished fading
             LDA fadeState
             CMP #FADE_STEP_FINAL+1
-            BEQ LogoHandleUFO
+            BEQ FadeInFinished
 
             LDA #<LOGO_FADE_STATE_TABLE_HI
             STA addrPointer
@@ -51,16 +52,28 @@
             JSR FadeIn4Steps
             JMP :+
 
+            FadeInFinished:
+                LDA #LOGOSTATE_LOAD_UFO
+                STA logoState
+                JMP :+
+
         LogoHandleUFO:
-            ;LDA #LOGOSTATE_SHOW_UFO
-            ;STA logoState
+            JSR DrawUFO
+            JSR SetUFOTarget
+            JSR MoveUFO
 
-            ;LDA currentFrame
-            ;CMP #$30
-            ;BNE :+
+        LDA ufoTargetPos
+        CMP #$FF
+        BNE :+
 
-            LDA #LOGOSTATE_FADE_OUT
-            STA logoState
+        LDA ufoTargetPos+1
+        CMP #$FF
+        BNE :+
+
+        LDA #LOGOSTATE_FADE_OUT
+        STA logoState
+        JMP :+
+
         LogoFadeOut:
             ; Check if we're fading in.
             LDA logoState
@@ -68,9 +81,8 @@
             BNE :+
 
             ; Check if we've finished fading
-            ;LDY fadeState
-            ;CMP #$00
-            ;BVS FadeOutFinished
+            LDY fadeState
+            BEQ FadeOutFinished
 
             LDA #<LOGO_FADE_STATE_TABLE_HI
             STA addrPointer
@@ -87,39 +99,55 @@
                 LDA #STATE_TITLE
                 STA programState
 
-                LDA #<titleScreen
-                STA nextScreen
-                LDA #>titleScreen
-                STA nextScreen
-        :
-        JMP JumpEngineFinished
-
     HandleTitle:
         LDA programState
         CMP #STATE_TITLE
         BNE :+
 
+        LDA #<titleScreen
+        STA nextScreen
+        LDA #>titleScreen
+        STA nextScreen+1
+        LDA #$20
+        STA nextTable
+        TitleFadeIn:
+            ; hi bytes of fade tables
+            LDA #<TITLE_FADE_STATE_TABLE_HI
+            STA addrPointer
+            LDA #>TITLE_FADE_STATE_TABLE_HI
+            STA addrPointer+1
 
+            ; lo bytes of fade tables
+            LDA #<TITLE_FADE_STATE_TABLE_LO
+            STA jumpPointer
+            LDA #>TITLE_FADE_STATE_TABLE_LO
+            STA jumpPointer+1
+            JSR FadeIn4Steps
 
-
-
-        :
-        JMP JumpEngineFinished
-
+        LDA #STATE_CHOOSE_GAMEMODE
+        STA programState
     HandleGamemodeSelection:
-        RTS
-
+        LDA programState
+        CMP #STATE_CHOOSE_GAMEMODE
+        BNE :+
     HandleDifficultySelection:
-        RTS
-
+        LDA programState
+        CMP #STATE_CHOOSE_DIFFICULTY
+        BNE :+
     Handle1PGame:
-        RTS
-
+        LDA programState
+        CMP #STATE_PLAYING_1P
+        BNE :+
     Handle2PGame:
-        RTS
-
+        LDA programState
+        CMP #STATE_PLAYING_2P
+        BNE :+
     HandleGameOver:
-        RTS
+        LDA programState
+        CMP #STATE_GAME_OVER
+        BNE :+
+    :
+    JMP JumpEngineFinished
 
     .INCLUDE "system/MainJumpEngine.asm"
 

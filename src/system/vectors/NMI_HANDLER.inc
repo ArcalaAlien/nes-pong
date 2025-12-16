@@ -14,6 +14,7 @@
 
     JSR LoadPalettes
     JSR DrawScreen
+    JSR SendSprites
 
     BIT PPUSTATUS
     LDA #$00
@@ -33,6 +34,13 @@
     TAX
     PLA
     RTI
+
+    SendSprites:
+        LDA #$00
+        STA OAMADDR
+        LDA #$02
+        STA OAMDMA
+        RTS
 
     .INCLUDE "../PPUFrameCounter.asm"
 .ENDPROC
