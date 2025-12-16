@@ -13,7 +13,9 @@ PPUMASK_MIRROR: .RES 1
 nextScreen: .RES 2
 currentScreen: .RES 1
 nextTable: .RES 1
-nextPalette: .RES 1
+lastPaletteDest: .RES 1
+nextPaletteDest: .RES 1
+nextPalette: .RES 2
 currentPalette: .RES 2
 
 ;Controller Stuff
@@ -43,6 +45,6 @@ p2Paddle: .RES 2
 .EXPORTZP addrPointer, jumpPointer
 .EXPORTZP currentFrame, currentSecond, sleeping, programState, gameState
 .EXPORTZP PPUCTRL_MIRROR, PPUMASK_MIRROR, nextScreen
-.EXPORTZP currentScreen, nextTable, currentPalette, nextPalette
+.EXPORTZP currentScreen, nextTable, currentPalette, nextPalette, lastPaletteDest, nextPaletteDest
 .EXPORTZP buttons, ballPos, ballSpeed, ballState
 .EXPORTZP p1Paddle, p2Paddle

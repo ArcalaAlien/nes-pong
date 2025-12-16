@@ -5,7 +5,7 @@
 ; Store hibyte of screen in nextScreen
 ; Store hibyte of nametable in nextTable
 DrawScreen:
-    LDA nextScreen+1
+    LDA nextScreen
     CMP currentScreen
     BEQ :+
     STA currentScreen

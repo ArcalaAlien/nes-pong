@@ -47,6 +47,7 @@
             DEX
             BNE :-
 
+
     CLEAR_NAMETABLES:
         BIT PPUSTATUS
         LDA #$20
@@ -65,15 +66,6 @@
             BNE :-
             DEX
             BNE :-
-
-    LDA #STATE_LOGO
-    STA programState
-    LDA #<logoScreen
-    STA nextScreen
-    LDA #>logoScreen
-    STA nextScreen+1
-    LDA #$20
-    STA nextTable
 
     ; Set up Pong Ball here
     LDA #BALL_START
@@ -111,6 +103,8 @@
     STA PPUMASK_MIRROR
     STA PPUMASK
 
+    LDA #STATE_LOGO
+    STA programState
     JMP MAIN
 .ENDPROC
 .EXPORT RESET_HANDLER

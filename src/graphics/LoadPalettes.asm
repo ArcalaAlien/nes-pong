@@ -1,25 +1,21 @@
 .INCLUDE "../system/CONSTANTS.inc"
-
+.INCLUDE "../system/VARIABLES.inc"
 
 .SEGMENT "ZEROPAGE"
-.IMPORTZP nextPalette, currentPalette
+.IMPORTZP nextPalette, currentPalette, lastPaletteDest, nextPaletteDest
 
 .SEGMENT "CODE"
-
-;Store hi byte of table in Y
+;Store hi byte of palette array in nextPalette
+;Store lo byte of ppuaddr in nextPaletteDest
 LoadPalettes:
-    LDA nextPalette+1
-    CMP currentPalette+1
-    BEQ :+
-    STA currentPalette+1
-
-    BIT PPUSTATUS           ;Reset adress latch
-    LDA #$3F
-    STA PPUADDR
-    STY PPUADDR             ;Store Y in PPUADDR
+    SetupPPU:
+        BIT PPUSTATUS           ;Reset adress latch
+        LDA #$3F
+        STA PPUADDR
+        LDA nextPaletteDest
+        STA PPUADDR
 
     ;Now we can start ~looping~
-    CLC
     LDY #$00
     PaletteLoop:
         LDA (nextPalette),Y

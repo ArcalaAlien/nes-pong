@@ -12,12 +12,8 @@
     STA PPUCTRL
     STA PPUMASK
 
-    LDA #$01
-
     JSR LoadPalettes
     JSR DrawScreen
-
-    DEC sleeping
 
     BIT PPUSTATUS
     LDA #$00
@@ -28,6 +24,8 @@
     STA PPUCTRL
     LDA PPUMASK_MIRROR
     STA PPUMASK
+
+    DEC sleeping
 
     PLA
     TAY

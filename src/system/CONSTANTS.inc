@@ -13,6 +13,17 @@ GAMESTATE_MATCH_OVER        = $22
 GAMESTATE_ROUND_OVER        = $23
 GAMESTATE_CHOOSE_MODIFIER   = $24
 
+;Logo States
+LOGOSTATE_FADE_IN           = $00
+LOGOSTATE_SHOW_UFO          = $01
+LOGOSTATE_FADE_OUT          = $02
+
+;Fade Steps
+FADE_STEP_BEGIN             = $00
+FADE_STEP1                  = $01
+FADE_STEP2                  = $02
+FADE_STEP_FINAL             = $03
+
 ;Buttons
 BUTTON_RIGHT                = (1 << 0)
 BUTTON_LEFT                 = (1 << 1)
@@ -103,7 +114,7 @@ SIZE_FLAG_MEDIUM            = %00000100
 SIZE_FLAG_MED_LARGE         = %00001000
 SIZE_FLAG_LARGE             = %00001100
 
-;Offsets
+;Size Offsets
 SIZE_OFFSET_SMALL           = $02
 SIZE_OFFSET_MEDIUM          = $04
 SIZE_OFFSET_MED_LARGE       = $06
