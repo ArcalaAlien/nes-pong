@@ -10,8 +10,15 @@
     CMP #LOGOSTATE_MOVE_UFO
     BNE :+
 
+    ;Check if we've hit the end of the
+    ;movement list
+
     ;Check Y, then X
     CheckUFOY:
+        LDA currentFrame
+        AND #$01
+        BNE CheckUFOX
+
         LDA logoUFOPos
         CMP ufoTargetPos
         BEQ CheckUFOYFinish
@@ -30,9 +37,8 @@
             TAX
             LDA ufoTargetPos
             CMP #$FF
-            BNE UpdateYPosition
+            BEQ :+
 
-            LDX #$FF
         UpdateYPosition:
             TXA
             ; Update stuff here
@@ -48,20 +54,18 @@
 
         MoveUFORight:
             CLC
-            ADC #$01
+            ADC #$02
             JMP CheckUFOXFinish
 
         MoveUFOLeft:
             SEC
-            SBC #$01
+            SBC #$02
 
         CheckUFOXFinish:
             TAX
             LDA ufoTargetPos+1
             CMP #$FF
-            BNE UpdateXPosition
-
-            LDX #$FF
+            BEQ :+
         UpdateXPosition:
             TXA
             ;Set Left Side

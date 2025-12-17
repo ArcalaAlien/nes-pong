@@ -30,8 +30,10 @@ ufoPathIndex: .RES 2
 ; bits 2-3 palette
 logoUFOFlags: .RES 1
 
-sparkleX: .RES 3
-sparkleY: .RES 3
+; Sparkle stuff
+sparkleFlags: .RES 2
+sparkleX: .RES 2
+sparkleY: .RES 2
 
 ;Controller Stuff
 buttons: .RES 2

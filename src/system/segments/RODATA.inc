@@ -10,7 +10,7 @@ PALETTES:
     LOGO_BG_FADE_FINAL:
         .BYTE $0F, $18, $28, $29, $FF ; Terminator
     LOGO_SPRITE_COLORS:
-        .BYTE $0F, $19, $2B, $39
+        .BYTE $0F, $19, $2B, $3C
         .BYTE $0F, $1C, $2C, $3C
         .BYTE $0F, $0B, $1B, $2B
         .BYTE $0F, $0C, $12, $22, $FF ; Terminator
@@ -53,7 +53,7 @@ SCREENS:
 
 ; $FF is a terminator
 UFO_MOVEMENT_PATH_X:
-    .BYTE $E0, $0F, $C0, $0F, $FF
+    .BYTE $00, $FF
 UFO_MOVEMENT_PATH_Y:
-    .BYTE $1F, $2F, $3F, $4D, $FF
+    .BYTE $28, $FF
 .EXPORT UFO_MOVEMENT_PATH_X, UFO_MOVEMENT_PATH_Y

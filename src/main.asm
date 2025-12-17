@@ -7,7 +7,7 @@
 .INCLUDE "system/VARIABLES.inc"
 
 .IMPORT FadeIn4Steps, FadeOut4Steps
-.IMPORT DrawUFO, SetUFOTarget, MoveUFO
+.IMPORT DrawUFO, SetUFOTarget, MoveUFO, CleanUpUFO
 .PROC MAIN
     loop:
         LDA programState
@@ -55,24 +55,35 @@
             FadeInFinished:
                 LDA #LOGOSTATE_LOAD_UFO
                 STA logoState
-                JMP :+
+                JMP:+
 
         LogoHandleUFO:
+            LDA currentSecond
+            CMP #$03
+            BCC :+
+
             JSR DrawUFO
+
+            LDA logoState
+            CMP #LOGOSTATE_MOVE_UFO
+            BNE LogoFadeOut
+
             JSR SetUFOTarget
             JSR MoveUFO
 
-        LDA ufoTargetPos
-        CMP #$FF
-        BNE :+
+            LDA ufoTargetPos
+            CMP #$FF
+            BNE :+
 
-        LDA ufoTargetPos+1
-        CMP #$FF
-        BNE :+
+            LDA ufoTargetPos+1
+            CMP #$FF
+            BNE :+
 
-        LDA #LOGOSTATE_FADE_OUT
-        STA logoState
-        JMP :+
+            JSR CleanUpUFO
+
+            LDA #LOGOSTATE_FADE_OUT
+            STA logoState
+            JMP :+
 
         LogoFadeOut:
             ; Check if we're fading in.
@@ -98,7 +109,8 @@
             FadeOutFinished:
                 LDA #STATE_TITLE
                 STA programState
-
+    :
+    JMP JumpEngineFinished ; End of LOGO
     HandleTitle:
         LDA programState
         CMP #STATE_TITLE
@@ -126,28 +138,41 @@
 
         LDA #STATE_CHOOSE_GAMEMODE
         STA programState
+    :
+    JMP JumpEngineFinished ; END OF TITLE
     HandleGamemodeSelection:
         LDA programState
         CMP #STATE_CHOOSE_GAMEMODE
         BNE :+
+
+    :
+    JMP JumpEngineFinished ; END OF GAMEMODE MENU
     HandleDifficultySelection:
         LDA programState
         CMP #STATE_CHOOSE_DIFFICULTY
         BNE :+
+
+    :
+    JMP JumpEngineFinished; ; END OF DIFFICULTY MENU
     Handle1PGame:
         LDA programState
         CMP #STATE_PLAYING_1P
         BNE :+
+    :
+    JMP JumpEngineFinished  ; END OF 1P GAME
     Handle2PGame:
         LDA programState
         CMP #STATE_PLAYING_2P
         BNE :+
+
+    :
+    JMP JumpEngineFinished ; END OF 2P GAME
     HandleGameOver:
         LDA programState
         CMP #STATE_GAME_OVER
         BNE :+
     :
-    JMP JumpEngineFinished
+    JMP JumpEngineFinished ; END OF GAME OVER
 
     .INCLUDE "system/MainJumpEngine.asm"
 

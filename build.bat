@@ -16,6 +16,9 @@ ca65 %cd%\src\graphics\FadeOut4Steps.asm -g^
 ca65 %cd%\src\graphics\DrawUFO.asm -g^
      -o %cd%\build\objects\DrawUFO.o
 
+ca65 %cd%\src\graphics\CleanUpUFO.asm -g^
+     -o %cd%\build\objects\CleanUpUFO.o
+
 ca65 %cd%\src\controllers\MoveUFO.asm -g^
      -o %cd%\build\objects\MoveUFO.o
 
@@ -29,5 +32,6 @@ ld65 -C %cd%\NES.cfg -o %cd%\build\NESPong.nes --dbgfile %cd%\build\NESPong.nes.
      %cd%\build\objects\FadeIn4Steps.o^
      %cd%\build\objects\FadeOut4Steps.o^
      %cd%\build\objects\DrawUFO.o^
+     %cd%\build\objects\CleanUpUFO.o^
      %cd%\build\objects\MoveUFO.o^
      %cd%\build\objects\SetUFOTarget.o

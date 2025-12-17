@@ -33,7 +33,7 @@
         LDA logoUFOFlags
         AND #$40
         LSR ; Shift bit 6 to bit 5
-        TXA ; Store our result in X
+        TAX ; Store our result in X
         STA SPRITE_0_ATTRIB ; Save it temporarily
 
     SetUFOPaletteLeft:
@@ -48,6 +48,7 @@
 
     LDA #UFO_START_X
     STA SPRITE_0_X
+    STA SPRITE_1_X
     ; END OF LEFT SIDE UFO
 
     ; START RIGHT SIDE UFO
@@ -64,7 +65,7 @@
         LDA logoUFOFlags
         AND #$40
         LSR ; Shift bit 6 to bit 5
-        TXA ; Store our result in X
+        TAX ; Store our result in X
         STA SPRITE_1_ATTRIB ; Save it temporarily
 
     SetUFOPaletteRight:
@@ -79,9 +80,6 @@
     ORA #$40
     ; Finished with right side ufo attrib
     STA SPRITE_1_ATTRIB
-
-    LDA #UFO_START_X+8 ; Right side offset!
-    STA SPRITE_1_X
 
     ; Finished making the UFO!
     LDA #LOGOSTATE_MOVE_UFO

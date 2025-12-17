@@ -129,9 +129,9 @@ COLOR_FLAG_PLT3             = %00100000
 COLOR_FLAG_PLT4             = %00110000
 
 ; UFO Stuff
-UFO_START_X                 = $F0
-UFO_START_Y                 = $0F
-UFO_DEFAULT_FLAGS           = %00000000
+UFO_START_X                 = $FE
+UFO_START_Y                 = $68
+UFO_DEFAULT_FLAGS           = %01000000
 
 ;Sprite positions in OAM
 ;LogoUFOLeft
