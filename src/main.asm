@@ -58,35 +58,50 @@
                 JMP:+
 
         LogoHandleUFO:
+            ;Don't want to start handling this
+            ;Until three seconds after, to give
+            ;ample delay for the logo.
             LDA currentSecond
             CMP #$03
             BCC :+
 
+            ;Now we draw the UFO
             JSR DrawUFO
 
+            ; Set the logo state to move
+            ; the UFO, so we don't keep
+            ; updating the UFO sprite.
             LDA logoState
             CMP #LOGOSTATE_MOVE_UFO
             BNE LogoFadeOut
 
+            ; Move the UFO!
             JSR SetUFOTarget
             JSR MoveUFO
 
+            ;Has the UFO Y hit the
+            ;end of its target list?
             LDA ufoTargetPos
             CMP #$FF
             BNE :+
 
+            ;If so, has the UFO X hit
+            ;the end of ITS target list?
             LDA ufoTargetPos+1
             CMP #$FF
             BNE :+
 
+            ;If so, we can get rid of the
+            ;UFO.
             JSR CleanUpUFO
 
+            ;Then we can start fading out.
             LDA #LOGOSTATE_FADE_OUT
             STA logoState
             JMP :+
 
         LogoFadeOut:
-            ; Check if we're fading in.
+            ; Check if we're fading out
             LDA logoState
             CMP #LOGOSTATE_FADE_OUT
             BNE :+
@@ -122,7 +137,16 @@
         STA nextScreen+1
         LDA #$20
         STA nextTable
+
+        LDA #TITLESTATE_FADE_IN
+        STA titleState
+        LDA #BG_PALETTE_0
+        STA nextPaletteDest
         TitleFadeIn:
+            LDA titleState
+            CMP #TITLESTATE_FADE_IN
+            BNE TitleWaitForPress
+
             ; hi bytes of fade tables
             LDA #<TITLE_FADE_STATE_TABLE_HI
             STA addrPointer
@@ -136,8 +160,25 @@
             STA jumpPointer+1
             JSR FadeIn4Steps
 
-        LDA #STATE_CHOOSE_GAMEMODE
-        STA programState
+        TitleWaitForPress:
+            LDA titleState
+            CMP #TITLESTATE_WAIT_FOR_BUTTON
+            BNE TitleFadeToDemo
+
+        TitleFadeToDemo:
+            LDA titleState
+            CMP #TITLESTATE_FADE_TO_DEMO
+            BNE TitleFadeToTitle
+
+        TitleFadeToTitle:
+            LDA titleState
+            CMP #TITLESTATE_FADE_TO_TITLE
+            BNE TitleFadeOut
+
+        TitleFadeOut:
+            LDA titleState
+            CMP #TITLESTATE_FADE_OUT
+            BNE :+
     :
     JMP JumpEngineFinished ; END OF TITLE
     HandleGamemodeSelection:

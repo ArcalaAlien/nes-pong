@@ -3,6 +3,7 @@ addrPointer: .RES 2
 jumpPointer: .RES 2
 currentFrame: .RES 1
 currentSecond: .RES 2
+targetSecond: .RES 2
 sleeping: .RES 1
 programState: .RES 1
 gameState: .RES 1
@@ -11,7 +12,7 @@ gameState: .RES 1
 PPUCTRL_MIRROR: .RES 1
 PPUMASK_MIRROR: .RES 1
 nextScreen: .RES 2
-currentScreen: .RES 1
+currentScreen: .RES 2
 nextTable: .RES 1
 lastPaletteDest: .RES 1
 nextPaletteDest: .RES 1
@@ -60,7 +61,7 @@ p1Paddle: .RES 2
 p2Paddle: .RES 2
 
 .EXPORTZP addrPointer, jumpPointer
-.EXPORTZP currentFrame, currentSecond, sleeping, programState, gameState
+.EXPORTZP currentFrame, currentSecond, targetSecond, sleeping, programState, gameState
 .EXPORTZP PPUCTRL_MIRROR, PPUMASK_MIRROR, nextScreen
 .EXPORTZP currentScreen, nextTable, currentPalette, nextPalette, lastPaletteDest, nextPaletteDest
 .EXPORTZP buttons, ballPos, ballSpeed, ballState

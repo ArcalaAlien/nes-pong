@@ -16,25 +16,25 @@ PALETTES:
         .BYTE $0F, $0C, $12, $22, $FF ; Terminator
 
     TITLE_BG_FADE_0:
-        .BYTE $0F, $00, $10, $20
-        .BYTE $0F, $1C, $2C, $3C
-        .BYTE $0F, $08, $18, $29
-        .BYTE $0F, $0B, $1A, $29, $FF ; Terminator
+        .BYTE $0F, $0F, $0F, $0F ; Pal 0
+        .BYTE $0F, $0F, $0F, $0F ; Pal 1
+        .BYTE $0F, $0F, $0F, $0F ; Pal 2
+        .BYTE $0F, $0F, $0F, $0F, $FF ; Pal 3
     TITLE_BG_FADE_1:
-        .BYTE $0F, $02, $12, $22
-        .BYTE $0F, $1E, $2E, $3E
-        .BYTE $0F, $0A, $1A, $2B
-        .BYTE $0F, $0D, $1C, $2B, $FF ; Terminator
+        .BYTE $0F, $00, $00, $00 ; Pal 0
+        .BYTE $0F, $0C, $0C, $0C ; Pal 1
+        .BYTE $0F, $04, $04, $04 ; Pal 2
+        .BYTE $0F, $0B, $0B, $0B, $FF ; Pal 3
     TITLE_BG_FADE_2:
-        .BYTE $0F, $00, $10, $20
-        .BYTE $0F, $1C, $2C, $3C
-        .BYTE $0F, $08, $18, $29
-        .BYTE $0F, $0B, $1A, $29, $FF ; Terminator
+        .BYTE $0F, $00, $10, $10 ; Pal 0
+        .BYTE $0F, $0C, $2C, $2C ; Pal 1
+        .BYTE $0F, $04, $15, $15 ; Pal 2
+        .BYTE $0F, $0B, $1A, $1A, $FF ; Pal 3
     TITLE_BG_FADE_FINAL:
-        .BYTE $0F, $00, $10, $20
-        .BYTE $0F, $1C, $2C, $3C
-        .BYTE $0F, $08, $18, $29
-        .BYTE $0F, $0B, $1A, $29, $FF ; Terminator
+        .BYTE $0F, $00, $10, $20 ; Pal 0
+        .BYTE $0F, $0C, $2C, $3C ; Pal 1
+        .BYTE $0F, $04, $15, $24 ; Pal 2
+        .BYTE $0F, $0B, $1A, $29, $FF ; Pal 3
 .EXPORT PALETTES
 .EXPORT LOGO_BG_FADE_0, LOGO_BG_FADE_1, LOGO_BG_FADE_2, LOGO_BG_FADE_FINAL, LOGO_SPRITE_COLORS
 .EXPORT TITLE_BG_FADE_0, TITLE_BG_FADE_1, TITLE_BG_FADE_2, TITLE_BG_FADE_FINAL
@@ -48,7 +48,7 @@ SCREENS:
     ;.INCLUDE "graphics/screens/bars/chooseEffectBar.inc"
     ;.INCLUDE "graphics/screens/backgrounds/backgroundScreenOne.inc"
 .EXPORT SCREENS
-.EXPORT logoScreen, titleScreen ;, chooseGamemodeScreen, chooseDifficultyScreen
+.EXPORT logoScreen, titleScreen;, chooseGamemodeScreen, chooseDifficultyScreen
 ;.EXPORT classicStatusBar, chooseEffectBar, backgroundScreenOne
 
 ; $FF is a terminator

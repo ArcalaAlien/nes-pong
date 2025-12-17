@@ -1,25 +1,46 @@
 .INCLUDE "../system/CONSTANTS.inc"
+.INCLUDE "../system/VARIABLES.inc"
 .IMPORTZP jumpPointer, nextTable, currentScreen, nextScreen
 
 ; Writes a full 1KB nametable to PPU
 ; Store hibyte of screen in nextScreen
 ; Store hibyte of nametable in nextTable
 DrawScreen:
-    LDA nextScreen
-    CMP currentScreen
-    BEQ :+
-    STA currentScreen
+    LDA #$00
+    STA matches
 
+    CheckScreenHi:
+        LDA nextScreen+1
+        CMP currentScreen+1
+        BNE CheckScreenLo
+        INC matches
+
+    CheckScreenLo:
+        STA currentScreen+1
+        LDA nextScreen
+        CMP currentScreen
+        BNE CheckMatches
+        INC matches
+
+    CheckMatches:
+        STA currentScreen
+        LDA matches
+        CMP #$02
+        BEQ :+  ; Leave the function,
+                ; as we've already drawn this
+                ; screen
+
+    ; Otherwise,
     ; Set up the PPU and nametable
     ; for writing
-    BIT PPUSTATUS
-    LDA nextTable
-    STA PPUADDR
-    LDA #$00
-    STA PPUADDR
+    SetUpPPU:
+        BIT PPUSTATUS
+        LDA nextTable
+        STA PPUADDR
+        LDA #$00
+        STA PPUADDR
 
     ; Now we make our loop
-    CLC ; Clear carry because we use it to compare.
     LDX #$00
     LDY #$00
     DrawScreenLoop:
@@ -34,9 +55,6 @@ DrawScreen:
         INC nextScreen+1
         CPX #$04
         BNE DrawScreenLoop
-
-    LDA currentScreen+1
-    STA nextScreen+1
     :
         RTS
 .EXPORT DrawScreen
