@@ -78,6 +78,7 @@
             ; Move the UFO!
             JSR SetUFOTarget
             JSR MoveUFO
+            JSR MakeSparkles
 
             ;Has the UFO Y hit the
             ;end of its target list?
@@ -124,8 +125,7 @@
             FadeOutFinished:
                 LDA #STATE_TITLE
                 STA programState
-    :
-    JMP JumpEngineFinished ; End of LOGO
+    :JMP JumpEngineFinished ; End of LOGO
     HandleTitle:
         LDA programState
         CMP #STATE_TITLE
@@ -179,41 +179,34 @@
             LDA titleState
             CMP #TITLESTATE_FADE_OUT
             BNE :+
-    :
-    JMP JumpEngineFinished ; END OF TITLE
+    :JMP JumpEngineFinished ; END OF TITLE
     HandleGamemodeSelection:
         LDA programState
         CMP #STATE_CHOOSE_GAMEMODE
         BNE :+
 
-    :
-    JMP JumpEngineFinished ; END OF GAMEMODE MENU
+    :JMP JumpEngineFinished ; END OF GAMEMODE MENU
     HandleDifficultySelection:
         LDA programState
         CMP #STATE_CHOOSE_DIFFICULTY
         BNE :+
-
-    :
-    JMP JumpEngineFinished; ; END OF DIFFICULTY MENU
+    :JMP JumpEngineFinished; ; END OF DIFFICULTY MENU
     Handle1PGame:
         LDA programState
         CMP #STATE_PLAYING_1P
         BNE :+
-    :
-    JMP JumpEngineFinished  ; END OF 1P GAME
+    :JMP JumpEngineFinished  ; END OF 1P GAME
     Handle2PGame:
         LDA programState
         CMP #STATE_PLAYING_2P
         BNE :+
 
-    :
-    JMP JumpEngineFinished ; END OF 2P GAME
+    :JMP JumpEngineFinished ; END OF 2P GAME
     HandleGameOver:
         LDA programState
         CMP #STATE_GAME_OVER
         BNE :+
-    :
-    JMP JumpEngineFinished ; END OF GAME OVER
+    :JMP JumpEngineFinished ; END OF GAME OVER
 
     .INCLUDE "system/MainJumpEngine.asm"
 

@@ -32,7 +32,16 @@ ufoPathIndex: .RES 2
 logoUFOFlags: .RES 1
 
 ; Sparkle stuff
-sparkleFlags: .RES 2
+; 0000 0000
+;
+; bits 0-1: Frame (0-3) (Sparkle 1)
+; bit  3:   Enabled     (Sparkle 1)
+; bits 4-5: Frame (0-3) (Sparkle 2)
+; bits 7:   Enabled     (Sparkle 2)
+sparkleFlags: .RES 1
+
+; Lo byte Sparkle 1
+; Hi Byte Sparkle 2
 sparkleX: .RES 2
 sparkleY: .RES 2
 
@@ -67,3 +76,4 @@ p2Paddle: .RES 2
 .EXPORTZP buttons, ballPos, ballSpeed, ballState
 .EXPORTZP p1Paddle, p2Paddle
 .EXPORTZP logoUFOPos, logoUFOFlags, ufoPathIndex, ufoTargetPos
+.EXPORTZP sparkleFlags, sparkleX, sparkleY

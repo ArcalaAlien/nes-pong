@@ -142,6 +142,11 @@ UFO_START_X                 = $FE
 UFO_START_Y                 = $68
 UFO_DEFAULT_FLAGS           = %01000000
 
+; Sparkle Stuff
+SPARKLE_FRAME_0             = $0A
+SPARKLE_FRAME_1             = $0B
+SPARKLE_FRAME_2             = $0C
+
 ;Sprite positions in OAM
 ;LogoUFOLeft
 SPRITE_0_Y      = $0200

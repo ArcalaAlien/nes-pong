@@ -1,3 +1,4 @@
 *.o linguist-detectable=false
 *.inc linguist-detectable=false
 *.nam linguist-detectable=false
+*.nss linguist-detectable=false
